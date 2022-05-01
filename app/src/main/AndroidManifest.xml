@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="de.felix.todo">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.felix.todo">
 
-    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.ToDo">
-        <activity android:name=".MainActivity" android:exported="true" android:label="@string/app_name" android:theme="@style/Theme.ToDo.NoActionBar">
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ToDo">
+        <activity
+            android:name=".TodoDetailActivity"
+            android:exported="true"
+            android:label="@string/todoDetailLabel"
+            android:theme="@style/Theme.ToDo.NoActionBar" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="@string/todoSettingsLabel"
+            android:theme="@style/Theme.ToDo.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/todoMainLabel"
+            android:theme="@style/Theme.ToDo.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
