@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class Adapter (private val values: MutableList<String>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter (private val values: MutableList<Todo>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -17,7 +17,7 @@ class Adapter (private val values: MutableList<String>) : RecyclerView.Adapter<A
 
     }
 
-    fun add(position: Int, item: String) {
+    fun add(position: Int, item: Todo) {
         values.add(position, item)
         notifyItemInserted(position)
     }
@@ -45,10 +45,9 @@ class Adapter (private val values: MutableList<String>) : RecyclerView.Adapter<A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        val name = values[position]
-        holder.txtHeader.text = name
+        holder.txtHeader.text = values[position]._title
         holder.txtHeader.setOnClickListener { remove(position) }
-        holder.txtFooter.text = "Footer: $name"
+        holder.txtFooter.text = values[position]._description
     }
 
     // Return the size of your dataset (invoked by the layout manager)

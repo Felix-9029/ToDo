@@ -11,5 +11,7 @@
 
     <!-- Design Preferences -->
     <string name="darkmode">Darkmode</string>
-    <string name="textsize">Textsize</string>
+    <string name="fontsize">Textsize</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
 </resources>

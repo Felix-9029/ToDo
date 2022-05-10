@@ -6,7 +6,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3203125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.5390625" />
-        <entry key="app/src/main/res/layout/activity_todo_detail.xml" value="0.5390625" />
+        <entry key="app/src/main/res/layout/activity_todo_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.30416666666666664" />
@@ -18,6 +18,8 @@
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.5552083333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.5552083333333333" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.32608695652173914" />
+        <entry key="app/src/main/res/xml/settings_content.xml" value="0.35733695652173914" />
+        <entry key="app/src/main/res/xml/todo_detail_content.xml" value="0.35733695652173914" />
       </map>
     </option>
   </component>

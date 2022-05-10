@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById<View>(R.id.my_recycler_view) as RecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val input: MutableList<String> = ArrayList()
+        val input: MutableList<Todo> = ArrayList()
         for (i in 0..99) {
-            input.add("Test$i")
+            input.add(Todo(i, "test$i", "Maschallah", "1.1.2000", "low"))
         }
 
         mAdapter = Adapter(input)

@@ -4,6 +4,8 @@
     <string name="todoSettingsLabel">Einstellungen</string>
     <string name="cancel">Abbrechen</string>
     <string name="design_header">Aussehen</string>
+    <string name="description">Beschreibung</string>
+    <string name="title">Titel</string>
+    <string name="fontsize">Schriftgröße</string>
     <string name="darkmode">Dunkelmodus</string>
-    <string name="textsize">Schriftgröße</string>
 </resources>

@@ -1,11 +1,9 @@
 package de.felix.todo
 
 import android.content.Intent
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import de.felix.todo.databinding.ActivityTodoDetailBinding
 
