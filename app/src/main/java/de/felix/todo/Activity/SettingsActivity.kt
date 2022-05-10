@@ -1,21 +1,33 @@
-package de.felix.todo
+package de.felix.todo.Activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
+import de.felix.todo.R
+import de.felix.todo.databinding.ActivitySettingsBinding
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
-                .commit()
+            supportFragmentManager.beginTransaction().replace(R.id.settings, SettingsFragment()).commit()
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
@@ -23,12 +35,4 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.settings_content, rootKey)
         }
     }
-
-    /*
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
-    */
 }

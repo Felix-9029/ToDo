@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="todoDetailLabel">ToDo\'s bearbeiten</string>
+    <string name="todoDetailLabel">ToDo bearbeiten</string>
     <string name="todoSettingsLabel">Einstellungen</string>
     <string name="cancel">Abbrechen</string>
     <string name="design_header">Aussehen</string>
@@ -8,4 +8,5 @@
     <string name="title">Titel</string>
     <string name="fontsize">Schriftgröße</string>
     <string name="darkmode">Dunkelmodus</string>
+    <string name="save">Speichern</string>
 </resources>

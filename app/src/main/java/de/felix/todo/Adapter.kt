@@ -27,6 +27,13 @@ class Adapter (private val values: MutableList<Todo>) : RecyclerView.Adapter<Ada
         notifyItemRemoved(position)
     }
 
+    fun edit(position: Int) {
+
+        values.removeAt(position)
+        values.add(position, Todo(999, "test999", "Ficken", "1.1.2000", "low"))
+        notifyItemChanged(position)
+    }
+
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(
         parent: ViewGroup,

@@ -2,8 +2,9 @@
     <string name="app_name" translatable="false">ToDo</string>
     <!-- Strings used for fragments for navigation -->
     <string name="todoMainLabel" translatable="false">ToDo\'s</string>
-    <string name="todoDetailLabel">edit ToDo\'s</string>
+    <string name="todoDetailLabel">edit ToDo</string>
     <string name="todoSettingsLabel">Settings</string>
+    <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
     <!-- Preference Titles -->
