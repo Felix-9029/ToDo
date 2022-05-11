@@ -10,8 +10,7 @@ class Adapter (private val values: MutableList<Todo>) : RecyclerView.Adapter<Ada
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    inner class ViewHolder(var layout: View) : RecyclerView.ViewHolder(layout) {
-        // each data item is just a string in this case
+    inner class ViewHolder(layout: View) : RecyclerView.ViewHolder(layout) {
         var txtHeader: TextView = layout.findViewById<View>(R.id.firstLine) as TextView
         var txtFooter: TextView = layout.findViewById<View>(R.id.secondLine) as TextView
 

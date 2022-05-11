@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import de.felix.todo.R
+import de.felix.todo.Todo
 import de.felix.todo.databinding.ActivityDetailBinding
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -24,28 +25,21 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         buttonCancel.setOnClickListener {
-            intent.putExtra("todoNew", false)
             finish()
         }
 
         buttonSave.setOnClickListener { view ->
             if (!(textViewTodoTitle.text.toString().isEmpty() || textViewTodoTitle.text.toString().isEmpty() || textViewTodoDescription.text.toString().isEmpty() || datePickerExpiration.toString().isEmpty() || textViewTodoTitle.text.toString().isEmpty())) {
-                intent.putExtra("todoNew", true)
-                intent.putExtra("todoID", "1")//Integer.parseInt(binding.textViewTodoTitle.text.toString()))
-                intent.putExtra("todoTitle", textViewTodoTitle.text.toString())
-                intent.putExtra("todoDescription", textViewTodoDescription.text.toString())
-                intent.putExtra("todoExpiration", datePickerExpiration.toString())
-                intent.putExtra("todoPriority", "low")
+                MainActivity.input().add(Todo(1, textViewTodoTitle.text.toString(), textViewTodoDescription.text.toString(), datePickerExpiration.toString(), "low"))
                 finish()
             }
             else {
-                Snackbar.make(view, "asdasf", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+                Snackbar.make(view, "Fill all fields!", Snackbar.LENGTH_LONG).setAction("Action", null).show()
             }
 
         }
 
         toolbar.setNavigationOnClickListener {
-            intent.putExtra("todoNew", false)
             finish()
         }
     }

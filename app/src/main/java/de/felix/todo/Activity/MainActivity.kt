@@ -1,17 +1,15 @@
 package de.felix.todo.Activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import de.felix.todo.Adapter
 import de.felix.todo.R
 import de.felix.todo.Todo
@@ -19,42 +17,46 @@ import de.felix.todo.TodoSwipe
 import de.felix.todo.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: Adapter
-    private var input: MutableList<Todo> = ArrayList()
+    companion object Factory {
+        fun input(): MutableList<Todo> = ArrayList()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(toolbar)
 
-        floatingActionButtonAdd.setOnClickListener {
-
-            //val activityResult = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
-            //    if (result.resultCode == Activity.RESULT_OK) {
-            //        val data = result.data?.extras
-            //        val todo = Todo(data?.get("todoID") as Int, data.get("todoTitle") as String, data.get("todoDescription") as String, data.get("todoExpiration") as String, data.get("todoPriority") as String)
-            //        input.add(todo)
-            //    }
-            //}
-            startActivity(Intent(this@MainActivity, DetailActivity::class.java))
-        }
-
         recyclerView = findViewById<View>(R.id.my_recycler_view) as RecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = Adapter(input)
+        adapter = Adapter(input())
         recyclerView.adapter = adapter
         val itemTouchHelper = ItemTouchHelper(TodoSwipe(adapter))
         itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        floatingActionButtonAdd.setOnClickListener {view ->
+            startActivity(Intent(this@MainActivity, DetailActivity::class.java))
+            adapter = Adapter(input())
+            recyclerView.adapter = adapter
+            if (input().size > 0) {
+                Snackbar.make(view, input().get(input().size - 1)._title, Snackbar.LENGTH_LONG).setAction("Action", null).show()
+            }
+            else {
+                Snackbar.make(view, "empty", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
