@@ -9,4 +9,5 @@
     <string name="fontsize">Schriftgröße</string>
     <string name="darkmode">Dunkelmodus</string>
     <string name="save">Speichern</string>
+    <string name="emptyBlock">Bitte alle Felder ausfüllen!</string>
 </resources>

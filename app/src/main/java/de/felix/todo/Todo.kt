@@ -1,17 +1,26 @@
 package de.felix.todo
 
-class Todo(id : Int, title : String, description : String, date : String, priority : String) {
-    val _id : Int
-    val _title : String
-    val _description : String
-    val _date : String
-    val _priority : String
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-    init {
-        _id = id
-        _title = title
-        _description = description
-        _date = date
-        _priority = priority
-    }
+/**
+ * A basic class representing an entity that is a row in a one-column database table.
+ *
+ * @ Entity - You must annotate the class as an entity and supply a table name if not class name.
+ * @ PrimaryKey - You must identify the primary key.
+ * @ ColumnInfo - You must supply the column name if it is different from the variable name.
+ *
+ * See the documentation for the full rich set of annotations.
+ * https://developer.android.com/topic/libraries/architecture/room.html
+ */
+
+@Entity(tableName = "todo_table")
+data class Todo(
+    val title: String,
+    val description: String,
+    val date: String,
+    val priority: Int,
+    val checked: Boolean
+    ) {
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

@@ -15,4 +15,6 @@
     <string name="fontsize">Textsize</string>
     <string name="description">Description</string>
     <string name="title">Title</string>
+
+    <string name="emptyBlock">Please fill all fields!</string>
 </resources>

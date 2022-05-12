@@ -3,12 +3,12 @@ package de.felix.todo
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class TodoSwipe(adapter: Adapter) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+class TodoSwipe(todoListAdapter: TodoListAdapter) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
-    private val _adapter: Adapter
+    private val _todoList_adapter: TodoListAdapter
 
     init {
-        _adapter = adapter
+        _todoList_adapter = todoListAdapter
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
@@ -18,8 +18,8 @@ class TodoSwipe(adapter: Adapter) : ItemTouchHelper.SimpleCallback(0, ItemTouchH
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position: Int = viewHolder.layoutPosition
         when (direction) {
-            ItemTouchHelper.LEFT -> _adapter.remove(position)
-            ItemTouchHelper.RIGHT -> _adapter.edit(position)
+            ItemTouchHelper.LEFT -> _todoList_adapter
+            ItemTouchHelper.RIGHT -> _todoList_adapter
         }
     }
 }
