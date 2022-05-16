@@ -45,16 +45,16 @@ class DetailActivity : AppCompatActivity() {
             } else {
                 val title = textViewTodoTitle.text.toString()
                 val description = textViewTodoDescription.text.toString()
-                val day: Int = Calendar.DAY_OF_MONTH
-                val month: Int = Calendar.MONTH
-                val year: Int = Calendar.YEAR
-                val expiration = "lala" //DateTimeFormatter.ofPattern("yyyy-MM-dd").format(datePickerExpiration)
+                val day: Int = datePickerExpiration.dayOfMonth
+                val month: Int = datePickerExpiration.month + 1
+                val year: Int = datePickerExpiration.year
+                val expiration = "$day-$month-$year"
                 val priority = 1
-                val isChecked = false
+                val isChecked = true
                 replyIntent.putExtra(EXTRA_TITLE, title)
                 replyIntent.putExtra(EXTRA_DESCRIPTION, description)
                 replyIntent.putExtra(EXTRA_DATE, expiration)
-                replyIntent.putExtra(EXTRA_PRIORITY, priority)
+                replyIntent.putExtra(EXTRA_PRIORITY, 1)
                 replyIntent.putExtra(EXTRA_ISCHECKED, isChecked)
                 setResult(RESULT_OK, replyIntent)
                 finish()

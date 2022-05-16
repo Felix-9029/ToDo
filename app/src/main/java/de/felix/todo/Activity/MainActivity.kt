@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val itemTouchHelper = ItemTouchHelper(TodoSwipe(todoListAdapter))
+        val itemTouchHelper = ItemTouchHelper(TodoSwipe(todoViewModel))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         floatingActionButtonAdd.setOnClickListener {
@@ -80,13 +80,13 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, intentData)
 
         if (requestCode == newWordActivityRequestCode && resultCode == RESULT_OK) {
-            val title = intentData?.getStringExtra(DetailActivity.EXTRA_TITLE)
-            val description = intentData?.getStringExtra(DetailActivity.EXTRA_DESCRIPTION)
-            val expiration = intentData?.getStringExtra(DetailActivity.EXTRA_DATE)
-            val priority = intentData?.getStringExtra(DetailActivity.EXTRA_PRIORITY)?.toInt()
-            val isChecked = intentData?.getStringExtra(DetailActivity.EXTRA_ISCHECKED).toBoolean()
-            if (title != null && description != null && expiration != null && priority != null) {
-                val todo = Todo(title, description, expiration, priority, isChecked)
+            val title = intentData?.extras?.getString(DetailActivity.EXTRA_TITLE)
+            val description = intentData?.extras?.getString(DetailActivity.EXTRA_DESCRIPTION)
+            val expiration = intentData?.extras?.getString(DetailActivity.EXTRA_DATE)
+            val priority = intentData?.extras?.getInt(DetailActivity.EXTRA_PRIORITY)
+            val isChecked = intentData?.extras?.getBoolean(DetailActivity.EXTRA_ISCHECKED)
+            if (title != null && description != null && expiration != null && priority != null && isChecked != null) {
+                val todo = Todo(title, description, expiration, priority.toInt(), isChecked)
                 todoViewModel.insert(todo)
             }
         }

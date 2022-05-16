@@ -46,7 +46,7 @@ abstract class TodoRoomDatabase : RoomDatabase() {
 
         private class TodoDatabaseCallback(
             private val scope: CoroutineScope
-        ) : RoomDatabase.Callback() {
+        ) : Callback() {
             /**
              * Override the onCreate method to populate the database.
              */
