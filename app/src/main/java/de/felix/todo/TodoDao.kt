@@ -1,7 +1,6 @@
 package de.felix.todo
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -28,7 +27,7 @@ interface TodoDao {
     suspend fun insert(todo: Todo)
 
     // TODO delete
-    @Delete()
+    @Query("DELETE FROM todo_table")
     suspend fun delete()
 
     @Query("DELETE FROM todo_table")

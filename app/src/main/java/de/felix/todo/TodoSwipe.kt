@@ -17,10 +17,10 @@ class TodoSwipe(todoViewModel: TodoViewModel) : ItemTouchHelper.SimpleCallback(0
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val position: Int = viewHolder.
+        val position: Int = viewHolder.layoutPosition
         when (direction) {
-            ItemTouchHelper.LEFT -> _todoViewModel.delete()
-            ItemTouchHelper.RIGHT -> _todoViewModel.
+            //ItemTouchHelper.LEFT ->
+            //ItemTouchHelper.RIGHT ->
         }
     }
 }

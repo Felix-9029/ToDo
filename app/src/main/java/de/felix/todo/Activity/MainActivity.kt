@@ -85,8 +85,8 @@ class MainActivity : AppCompatActivity() {
             val expiration = intentData?.extras?.getString(DetailActivity.EXTRA_DATE)
             val priority = intentData?.extras?.getInt(DetailActivity.EXTRA_PRIORITY)
             val isChecked = intentData?.extras?.getBoolean(DetailActivity.EXTRA_ISCHECKED)
-            if (title != null && description != null && expiration != null && priority != null && isChecked != null) {
-                val todo = Todo(title, description, expiration, priority.toInt(), isChecked)
+            if (title != null && description != null && expiration != null && isChecked != null) {
+                val todo = Todo(title, description, expiration, isChecked)
                 todoViewModel.insert(todo)
             }
         }
