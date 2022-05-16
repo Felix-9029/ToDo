@@ -70,11 +70,6 @@ abstract class TodoRoomDatabase : RoomDatabase() {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
             wordDao.deleteAll()
-
-            var word = Todo("Hello", "I bims", "dafj", 2, false)
-            wordDao.insert(word)
-            word = Todo("World!", "die eine", "dsafj", 1, false)
-            wordDao.insert(word)
         }
     }
 }

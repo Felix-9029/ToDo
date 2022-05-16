@@ -21,4 +21,11 @@ class TodoRepository(private val todoDao: TodoDao) {
     suspend fun insert(todo: Todo) {
         todoDao.insert(todo)
     }
+
+    // TODO delete
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun delete(todo: Todo) {
+        todoDao.delete()
+    }
 }

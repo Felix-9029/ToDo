@@ -26,6 +26,10 @@ interface TodoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(todo: Todo)
 
+    // TODO delete
+    @Query("DELETE FROM todo_table")
+    suspend fun delete()
+
     @Query("DELETE FROM todo_table")
     suspend fun deleteAll()
 }
