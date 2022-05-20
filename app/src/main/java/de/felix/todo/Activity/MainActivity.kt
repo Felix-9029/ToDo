@@ -6,7 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.observe
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.felix.todo.*
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        applySharedPreferenceSettings()
+
         val todoListAdapter = TodoListAdapter()
         recyclerView.adapter = todoListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -53,6 +57,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, DetailActivity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applySharedPreferenceSettings()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -87,6 +96,20 @@ class MainActivity : AppCompatActivity() {
             if (title != null && description != null && expiration != null && isChecked != null) {
                 val todo = Todo(title, description, expiration, isChecked)
                 todoViewModel.insert(todo)
+            }
+        }
+    }
+
+    private fun applySharedPreferenceSettings() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        val darkmode = sharedPreferences?.getBoolean("darkmode", true)
+        if (darkmode != null) {
+            if (darkmode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }

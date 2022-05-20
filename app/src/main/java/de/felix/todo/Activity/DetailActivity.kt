@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import de.felix.todo.R
@@ -35,7 +36,7 @@ class DetailActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        applyTextSizeFromSharedPreference()
+        applySharedPreferenceSettings()
 
         val replyIntent = Intent()
 
@@ -74,7 +75,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        applyTextSizeFromSharedPreference()
+        applySharedPreferenceSettings()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -97,14 +98,24 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun applyTextSizeFromSharedPreference() {
+    private fun applySharedPreferenceSettings() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val myCheck = sharedPreferences?.getString("fontsize", "19")
-        if (myCheck != null) {
-            textViewTodoTitle.textSize = myCheck.toFloat()
-            textViewTodoDescription.textSize = myCheck.toFloat()
-            buttonCancel.textSize = myCheck.toFloat()
-            buttonSave.textSize = myCheck.toFloat()
+        val textsizeString = sharedPreferences?.getString("fontsize", "19")
+        if (textsizeString != null) {
+            textViewTodoTitle.textSize = textsizeString.toFloat()
+            textViewTodoDescription.textSize = textsizeString.toFloat()
+            buttonCancel.textSize = textsizeString.toFloat()
+            buttonSave.textSize = textsizeString.toFloat()
+        }
+
+        val darkmode = sharedPreferences?.getBoolean("darkmode", true)
+        if (darkmode != null) {
+            if (darkmode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
     }
 }

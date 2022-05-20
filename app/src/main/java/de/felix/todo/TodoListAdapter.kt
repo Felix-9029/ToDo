@@ -46,10 +46,10 @@ class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
                 textViewTitle.paintFlags = textViewTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
 
             }
-            applyTextSizeFromSharedPreference()
+            applySharedPreferenceSettings()
         }
 
-        private fun applyTextSizeFromSharedPreference() {
+        private fun applySharedPreferenceSettings() {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity)
             val myCheck = sharedPreferences?.getString("fontsize", "19")
             if (myCheck != null) {
