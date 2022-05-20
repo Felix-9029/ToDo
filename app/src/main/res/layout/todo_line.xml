@@ -1,37 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip" >
+    android:layout_height="wrap_content"
+    android:padding="6dip">
 
     <CheckBox
         android:id="@+id/checkBoxTodoDone"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentStart="true"
+
+        android:layout_centerVertical="true" />
 
     <TextView
-        android:id="@+id/firstLine"
+        android:id="@+id/textViewTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_above="@id/secondLine"
+
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/checkBoxTodoDone"
-        android:gravity="center_vertical"
-        android:text="Title"
-        android:textSize="16sp" />
+        android:layout_alignParentEnd="true"
+
+        android:text="Title" />
 
     <TextView
-        android:id="@+id/secondLine"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/textViewExpirationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/textViewTitle"
         android:layout_toEndOf="@id/checkBoxTodoDone"
-        android:text="Description"
-        android:textSize="12sp" />
+
+        android:text="01.01.1970" />
+
+    <TextView
+        android:id="@+id/textViewPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/textViewTitle"
+        android:layout_toEndOf="@id/textViewExpirationDate"
+        android:layout_toStartOf="@id/textViewTag"
+
+        android:text="low"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textViewTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/textViewTitle"
+        android:layout_alignParentEnd="true"
+
+        android:text="standard" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/textViewExpirationDate"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/checkBoxTodoDone"
+
+        android:text="Description" />
 
 </RelativeLayout>

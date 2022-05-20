@@ -1,15 +1,18 @@
 package de.felix.todo.Activity
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import de.felix.todo.R
 import de.felix.todo.databinding.ActivityDetailBinding
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.todo_line.*
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -32,7 +35,10 @@ class DetailActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        applyTextSizeFromSharedPreference()
+
         val replyIntent = Intent()
+
         buttonCancel.setOnClickListener {
             setResult(RESULT_CANCELED, replyIntent)
             finish()
@@ -40,7 +46,6 @@ class DetailActivity : AppCompatActivity() {
 
         buttonSave.setOnClickListener { view ->
             if (TextUtils.isEmpty(textViewTodoTitle.text) || TextUtils.isEmpty(textViewTodoDescription.text)) {
-                setResult(RESULT_CANCELED, replyIntent)
                 Snackbar.make(view, R.string.emptyBlock, Snackbar.LENGTH_LONG).setAction("Action", null).show()
             } else {
                 val title = textViewTodoTitle.text.toString()
@@ -54,7 +59,7 @@ class DetailActivity : AppCompatActivity() {
                 replyIntent.putExtra(EXTRA_TITLE, title)
                 replyIntent.putExtra(EXTRA_DESCRIPTION, description)
                 replyIntent.putExtra(EXTRA_DATE, expiration)
-                replyIntent.putExtra(EXTRA_PRIORITY, 1)
+                replyIntent.putExtra(EXTRA_PRIORITY, priority)
                 replyIntent.putExtra(EXTRA_ISCHECKED, isChecked)
                 setResult(RESULT_OK, replyIntent)
                 finish()
@@ -65,6 +70,11 @@ class DetailActivity : AppCompatActivity() {
             setResult(RESULT_CANCELED, replyIntent)
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyTextSizeFromSharedPreference()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -84,6 +94,17 @@ class DetailActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun applyTextSizeFromSharedPreference() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val myCheck = sharedPreferences?.getString("fontsize", "11")
+        if (myCheck != null) {
+            textViewTodoTitle.textSize = myCheck.toFloat()
+            textViewTodoDescription.textSize = myCheck.toFloat()
+            buttonCancel.textSize = myCheck.toFloat()
+            buttonSave.textSize = myCheck.toFloat()
         }
     }
 }

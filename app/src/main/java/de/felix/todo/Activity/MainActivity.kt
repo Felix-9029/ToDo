@@ -39,9 +39,8 @@ class MainActivity : AppCompatActivity() {
         val todoListAdapter = TodoListAdapter()
         recyclerView.adapter = todoListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         todoViewModel.allTodos.observe(this) { todos ->
-            // Update the cached copy of the words in the adapter.
+            // Update the cached copy of the todos in the adapter.
             todos.let {
                 todoListAdapter.submitList(it)
             }
