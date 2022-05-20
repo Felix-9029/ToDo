@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         mainActivity = this
         setContentView(R.layout.activity_main)
 
-        val binding : ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(toolbar)
@@ -88,29 +88,24 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, intentData)
 
         if (requestCode == newWordActivityRequestCode && resultCode == RESULT_OK) {
-            val title = intentData?.extras?.getString(DetailActivity.EXTRA_TITLE)
-            val description = intentData?.extras?.getString(DetailActivity.EXTRA_DESCRIPTION)
-            val expiration = intentData?.extras?.getString(DetailActivity.EXTRA_DATE)
-            val priority = intentData?.extras?.getInt(DetailActivity.EXTRA_PRIORITY)
-            val isChecked = intentData?.extras?.getBoolean(DetailActivity.EXTRA_ISCHECKED)
-            if (title != null && description != null && expiration != null && isChecked != null) {
-                val todo = Todo(title, description, expiration, isChecked)
-                todoViewModel.insert(todo)
-            }
+            val title = intentData?.extras?.getString(DetailActivity.EXTRA_TITLE)!!
+            val description = intentData.extras?.getString(DetailActivity.EXTRA_DESCRIPTION)!!
+            val expiration = intentData.extras?.getString(DetailActivity.EXTRA_DATE)!!
+            val priority = intentData.extras?.getInt(DetailActivity.EXTRA_PRIORITY)!!
+            val isChecked = intentData.extras?.getBoolean(DetailActivity.EXTRA_ISCHECKED)!!
+            val todo = Todo(title, description, expiration, isChecked)
+            todoViewModel.insert(todo)
         }
     }
 
     private fun applySharedPreferenceSettings() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        val darkmode = sharedPreferences?.getBoolean("darkmode", true)
-        if (darkmode != null) {
-            if (darkmode) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+        val darkmode = sharedPreferences?.getBoolean("darkmode", true)!!
+        if (darkmode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 }

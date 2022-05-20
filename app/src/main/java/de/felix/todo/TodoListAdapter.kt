@@ -41,8 +41,7 @@ class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
             checkBoxTodoDone.isChecked = done
             if (done) {
                 textViewTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            }
-            else {
+            } else {
                 textViewTitle.paintFlags = textViewTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
 
             }
@@ -51,14 +50,12 @@ class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
 
         private fun applySharedPreferenceSettings() {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity)
-            val myCheck = sharedPreferences?.getString("fontsize", "19")
-            if (myCheck != null) {
-                textViewTitle.textSize = myCheck.toFloat()
-                textViewDescription.textSize = myCheck.toFloat()
-                textViewExpirationDate.textSize = myCheck.toFloat()
-                textViewPriority.textSize = myCheck.toFloat()
-                textViewTag.textSize = myCheck.toFloat()
-            }
+            val myCheck = sharedPreferences?.getString("fontsize", "19")!!
+            textViewTitle.textSize = myCheck.toFloat()
+            textViewDescription.textSize = myCheck.toFloat()
+            textViewExpirationDate.textSize = myCheck.toFloat()
+            textViewPriority.textSize = myCheck.toFloat()
+            textViewTag.textSize = myCheck.toFloat()
         }
 
         companion object {
