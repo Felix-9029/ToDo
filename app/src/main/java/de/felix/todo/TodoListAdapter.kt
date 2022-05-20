@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.felix.todo.Activity.MainActivity
 import de.felix.todo.TodoListAdapter.TodoViewHolder
-import kotlinx.android.synthetic.main.activity_detail.*
 
 class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
 
@@ -52,7 +51,7 @@ class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
 
         private fun applyTextSizeFromSharedPreference() {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.mainActivity)
-            val myCheck = sharedPreferences?.getString("fontsize", "11")
+            val myCheck = sharedPreferences?.getString("fontsize", "19")
             if (myCheck != null) {
                 textViewTitle.textSize = myCheck.toFloat()
                 textViewDescription.textSize = myCheck.toFloat()

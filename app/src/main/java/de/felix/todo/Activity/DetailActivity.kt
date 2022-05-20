@@ -19,11 +19,11 @@ import java.util.*
 class DetailActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_TITLE = "com.example.android.wordlistsql.TITLE"
-        const val EXTRA_DESCRIPTION = "com.example.android.wordlistsql.DESCRIPTION"
-        const val EXTRA_DATE = "com.example.android.wordlistsql.DATE"
-        const val EXTRA_PRIORITY = "com.example.android.wordlistsql.PRIORITY"
-        const val EXTRA_ISCHECKED = "com.example.android.wordlistsql.ISCHECKED"
+        const val EXTRA_TITLE = "de.felix.todo.todosql.TITLE"
+        const val EXTRA_DESCRIPTION = "de.felix.todo.todosql.DESCRIPTION"
+        const val EXTRA_DATE = "de.felix.todo.todosql.DATE"
+        const val EXTRA_PRIORITY = "de.felix.todo.todosql.PRIORITY"
+        const val EXTRA_ISCHECKED = "de.felix.todo.todosql.ISCHECKED"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,7 +99,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun applyTextSizeFromSharedPreference() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val myCheck = sharedPreferences?.getString("fontsize", "11")
+        val myCheck = sharedPreferences?.getString("fontsize", "19")
         if (myCheck != null) {
             textViewTodoTitle.textSize = myCheck.toFloat()
             textViewTodoDescription.textSize = myCheck.toFloat()
