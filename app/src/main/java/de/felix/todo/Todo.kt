@@ -19,6 +19,8 @@ data class Todo(
     val title: String,
     val description: String,
     val expiration: String,
+    val priority: String,
+    val tag: String,
     val checked: Boolean
     ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0

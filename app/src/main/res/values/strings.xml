@@ -17,4 +17,6 @@
     <string name="title">Title</string>
 
     <string name="emptyBlock">Please fill all fields!</string>
+    <string name="priority">Priority</string>
+    <string name="tag">Tag</string>
 </resources>

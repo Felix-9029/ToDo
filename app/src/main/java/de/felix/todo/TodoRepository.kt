@@ -22,10 +22,21 @@ class TodoRepository(private val todoDao: TodoDao) {
         todoDao.insert(todo)
     }
 
-    // TODO delete
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun delete(todo: Todo) {
-        todoDao.delete()
+    suspend fun delete(id: Int) {
+        todoDao.delete(id)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun updateChecked(id: Int, checked: Boolean) {
+        todoDao.updateChecked(id, checked)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun updateTodo(id: Int, title: String, description: String, expiration: String, priority: String, tag: String) {
+        todoDao.updateTodo(id, title, description, expiration, priority, tag)
     }
 }

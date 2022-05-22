@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.lifecycle.observe
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -15,11 +16,23 @@ import de.felix.todo.*
 import de.felix.todo.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * @author <p>Felix Reichert</p>
+ * <p>Matrikelnummer: 19019</p>
+ * <p>Package: de.felix.todo.Activity</p>
+ * <p>Datei: MainActivity.kt</p>
+ * <p>Datum: 02.05.2022</p>
+ * <p>Version: 1</p>
+ *
+ * This Project is inspired by https://developer.android.com/codelabs/android-room-with-a-view-kotlin
+ */
+
 class MainActivity : AppCompatActivity() {
 
-    private val newWordActivityRequestCode = 1
+    private val newTodoActivityRequestCode = 1
+    private val updateTodoActivityRequestCode = 2
 
-    private val todoViewModel: TodoViewModel by viewModels {
+    val todoViewModel: TodoViewModel by viewModels {
         TodoViewModelFactory((application as TodosApplication).repository)
     }
 
@@ -55,13 +68,14 @@ class MainActivity : AppCompatActivity() {
 
         floatingActionButtonAdd.setOnClickListener {
             val intent = Intent(this@MainActivity, DetailActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+            startActivityForResult(intent, newTodoActivityRequestCode)
         }
     }
 
     override fun onResume() {
         super.onResume()
         applySharedPreferenceSettings()
+        setSharedPreference("isEdit", "false")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -86,15 +100,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
-
-        if (requestCode == newWordActivityRequestCode && resultCode == RESULT_OK) {
-            val title = intentData?.extras?.getString(DetailActivity.EXTRA_TITLE)!!
+        if (resultCode == RESULT_OK) {
+            val title = intentData!!.extras?.getString(DetailActivity.EXTRA_TITLE)!!
             val description = intentData.extras?.getString(DetailActivity.EXTRA_DESCRIPTION)!!
             val expiration = intentData.extras?.getString(DetailActivity.EXTRA_DATE)!!
-            val priority = intentData.extras?.getInt(DetailActivity.EXTRA_PRIORITY)!!
+            val priority = intentData.extras?.getString(DetailActivity.EXTRA_PRIORITY)!!
+            val tag = intentData.extras?.getString(DetailActivity.EXTRA_TAG)!!
             val isChecked = intentData.extras?.getBoolean(DetailActivity.EXTRA_ISCHECKED)!!
-            val todo = Todo(title, description, expiration, isChecked)
-            todoViewModel.insert(todo)
+            if (requestCode == newTodoActivityRequestCode) {
+                val todo = Todo(title, description, expiration, priority, tag, isChecked)
+                todoViewModel.insert(todo)
+            } else if (requestCode == updateTodoActivityRequestCode) {
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+                val id = sharedPreferences?.getString("todoID", "0")!!.toInt()
+                todoViewModel.updateTodo(id, title, description, expiration, priority, tag)
+            }
         }
     }
 
@@ -106,6 +126,13 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+    private fun setSharedPreference(key: String, value: String) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPreferences.edit {
+            putString(key, value)
         }
     }
 }

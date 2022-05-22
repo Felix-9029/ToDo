@@ -10,4 +10,6 @@
     <string name="darkmode">Dunkelmodus</string>
     <string name="save">Speichern</string>
     <string name="emptyBlock">Bitte alle Felder ausfüllen!</string>
+    <string name="priority">Priorität</string>
+    <string name="tag">Tag</string>
 </resources>

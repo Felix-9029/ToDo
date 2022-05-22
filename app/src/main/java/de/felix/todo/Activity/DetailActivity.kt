@@ -1,7 +1,6 @@
 package de.felix.todo.Activity
 
 import android.content.Intent
-import android.graphics.Paint
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Menu
@@ -13,9 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 import de.felix.todo.R
 import de.felix.todo.databinding.ActivityDetailBinding
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.todo_line.*
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -24,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_DESCRIPTION = "de.felix.todo.todosql.DESCRIPTION"
         const val EXTRA_DATE = "de.felix.todo.todosql.DATE"
         const val EXTRA_PRIORITY = "de.felix.todo.todosql.PRIORITY"
+        const val EXTRA_TAG = "de.felix.todo.todosql.TAG"
         const val EXTRA_ISCHECKED = "de.felix.todo.todosql.ISCHECKED"
     }
 
@@ -55,12 +52,14 @@ class DetailActivity : AppCompatActivity() {
                 val month: Int = datePickerExpiration.month + 1
                 val year: Int = datePickerExpiration.year
                 val expiration = "$day-$month-$year"
-                val priority = 1
-                val isChecked = true
+                val priority = textViewPriority.text.toString()
+                val tag = textViewTag.text.toString()
+                val isChecked = false
                 replyIntent.putExtra(EXTRA_TITLE, title)
                 replyIntent.putExtra(EXTRA_DESCRIPTION, description)
                 replyIntent.putExtra(EXTRA_DATE, expiration)
                 replyIntent.putExtra(EXTRA_PRIORITY, priority)
+                replyIntent.putExtra(EXTRA_TAG, tag)
                 replyIntent.putExtra(EXTRA_ISCHECKED, isChecked)
                 setResult(RESULT_OK, replyIntent)
                 finish()
@@ -70,6 +69,13 @@ class DetailActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             setResult(RESULT_CANCELED, replyIntent)
             finish()
+        }
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        if (sharedPreferences?.getString("isEdit", "false")!!.toBoolean()) {
+            textViewTodoTitle.setText(sharedPreferences.getString("todoTitle", "title")!!)
+            textViewTodoDescription.setText(sharedPreferences.getString("todoDescription", "title")!!)
+            textViewPriority.setText(sharedPreferences.getString("todoPriority", "title")!!)
+            textViewTag.setText(sharedPreferences.getString("todoTag", "title")!!)
         }
     }
 
@@ -100,11 +106,13 @@ class DetailActivity : AppCompatActivity() {
 
     private fun applySharedPreferenceSettings() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val textsizeString = sharedPreferences.getString("fontsize", "19")!!
-        textViewTodoTitle.textSize = textsizeString.toFloat()
-        textViewTodoDescription.textSize = textsizeString.toFloat()
-        buttonCancel.textSize = textsizeString.toFloat()
-        buttonSave.textSize = textsizeString.toFloat()
+        val textSize = sharedPreferences.getString("fontsize", "19")!!.toFloat()
+        textViewTodoTitle.textSize = textSize
+        textViewTodoDescription.textSize = textSize
+        textViewPriority.textSize = textSize
+        textViewTag.textSize = textSize
+        buttonCancel.textSize = textSize
+        buttonSave.textSize = textSize
 
         val darkmode = sharedPreferences.getBoolean("darkmode", true)
         if (darkmode) {

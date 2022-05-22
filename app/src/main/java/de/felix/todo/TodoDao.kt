@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -26,9 +27,14 @@ interface TodoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(todo: Todo)
 
-    // TODO delete
-    @Query("DELETE FROM todo_table")
-    suspend fun delete()
+    @Query("DELETE FROM todo_table WHERE id=:id")
+    suspend fun delete(id: Int)
+
+    @Query("UPDATE todo_table SET checked=:checked WHERE id=:id")
+    suspend fun updateChecked(id: Int, checked: Boolean)
+
+    @Query("UPDATE todo_table SET title=:title, description=:description, expiration=:expiration, priority=:priority, tag=:tag WHERE id=:id")
+    suspend fun updateTodo(id: Int, title: String, description: String, expiration: String, priority: String, tag: String)
 
     @Query("DELETE FROM todo_table")
     suspend fun deleteAll()
