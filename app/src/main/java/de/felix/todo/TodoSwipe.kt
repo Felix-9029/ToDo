@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.felix.todo.Activity.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class TodoSwipe(todoViewModel: TodoViewModel) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+class TodoSwipe(todoViewModel: TodoViewModel) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT /*or ItemTouchHelper.RIGHT*/) {
 
     private val _todoViewModel: TodoViewModel
 

@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import de.felix.todo.R
@@ -66,6 +67,11 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
+        buttonDelete.setOnClickListener {
+            setResult(RESULT_OK, replyIntent)
+            finish()
+        }
+
         toolbar.setNavigationOnClickListener {
             setResult(RESULT_CANCELED, replyIntent)
             finish()
@@ -119,6 +125,13 @@ class DetailActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+    private fun setSharedPreference(key: String, value: String) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPreferences.edit {
+            putString(key, value)
         }
     }
 }

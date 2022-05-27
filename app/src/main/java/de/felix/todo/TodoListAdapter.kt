@@ -37,11 +37,6 @@ class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
         private var textViewTag: TextView = itemView.findViewById<View>(R.id.textViewTag) as TextView
         private var checkBoxTodoDone: CheckBox = itemView.findViewById<View>(R.id.checkBoxTodoDone) as CheckBox
 
-
-        // TODO HIER DIE FUNCTION DIE CALLED WERDEN SOLL
-
-
-
         fun bind(current: Todo) {
             val id = current.id
             val title = current.title

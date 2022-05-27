@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private val newTodoActivityRequestCode = 1
     private val updateTodoActivityRequestCode = 2
+    private val deleteTodoActivityRequestCode = 3
 
     val todoViewModel: TodoViewModel by viewModels {
         TodoViewModelFactory((application as TodosApplication).repository)
@@ -114,6 +115,11 @@ class MainActivity : AppCompatActivity() {
                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
                 val id = sharedPreferences?.getString("todoID", "0")!!.toInt()
                 todoViewModel.updateTodo(id, title, description, expiration, priority, tag)
+            }
+            else if (requestCode == deleteTodoActivityRequestCode) {
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+                val id = sharedPreferences?.getString("todoID", "0")!!.toInt()
+                todoViewModel.delete(id)
             }
         }
     }
