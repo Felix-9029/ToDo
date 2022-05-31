@@ -19,6 +19,8 @@ class TodoSwipe(todoViewModel: TodoViewModel) : ItemTouchHelper.SimpleCallback(0
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+        TodoListAdapter.getTodo(viewHolder.adapterPosition)
         val position: Int = viewHolder.adapterPosition
         val adapter: TodoListAdapter = MainActivity.mainActivity.recyclerView.adapter as TodoListAdapter
         when (direction) {

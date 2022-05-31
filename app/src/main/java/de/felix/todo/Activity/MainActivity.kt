@@ -108,18 +108,21 @@ class MainActivity : AppCompatActivity() {
             val priority = intentData.extras?.getString(DetailActivity.EXTRA_PRIORITY)!!
             val tag = intentData.extras?.getString(DetailActivity.EXTRA_TAG)!!
             val isChecked = intentData.extras?.getBoolean(DetailActivity.EXTRA_ISCHECKED)!!
-            if (requestCode == newTodoActivityRequestCode) {
-                val todo = Todo(title, description, expiration, priority, tag, isChecked)
-                todoViewModel.insert(todo)
-            } else if (requestCode == updateTodoActivityRequestCode) {
-                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-                val id = sharedPreferences?.getString("todoID", "0")!!.toInt()
-                todoViewModel.updateTodo(id, title, description, expiration, priority, tag)
-            }
-            else if (requestCode == deleteTodoActivityRequestCode) {
-                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-                val id = sharedPreferences?.getString("todoID", "0")!!.toInt()
-                todoViewModel.delete(id)
+            when (requestCode) {
+                newTodoActivityRequestCode -> {
+                    val todo = Todo(title, description, expiration, priority, tag, isChecked)
+                    todoViewModel.insert(todo)
+                }
+                updateTodoActivityRequestCode -> {
+                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+                    val id = sharedPreferences?.getString("todoID", "0")!!.toInt()
+                    todoViewModel.updateTodo(id, title, description, expiration, priority, tag)
+                }
+                deleteTodoActivityRequestCode -> {
+                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+                    val id = sharedPreferences?.getString("todoID", "0")!!.toInt()
+                    todoViewModel.delete(id)
+                }
             }
         }
     }

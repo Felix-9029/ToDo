@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
@@ -44,7 +46,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         buttonSave.setOnClickListener { view ->
-            if (TextUtils.isEmpty(textViewTodoTitle.text) || TextUtils.isEmpty(textViewTodoDescription.text)) {
+            if (TextUtils.isEmpty(textViewTodoTitle.text) || TextUtils.isEmpty(textViewTodoDescription.text) || TextUtils.isEmpty(textViewPriority.text) || TextUtils.isEmpty(textViewTag.text)) {
                 Snackbar.make(view, R.string.emptyBlock, Snackbar.LENGTH_LONG).setAction("Action", null).show()
             } else {
                 val title = textViewTodoTitle.text.toString()
@@ -67,8 +69,11 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
         buttonDelete.setOnClickListener {
-            setResult(RESULT_OK, replyIntent)
+            MainActivity.mainActivity.todoViewModel.delete(sharedPreferences.getString("todoID", "1")!!.toInt())
+            setResult(RESULT_CANCELED, replyIntent)
             finish()
         }
 
@@ -76,12 +81,16 @@ class DetailActivity : AppCompatActivity() {
             setResult(RESULT_CANCELED, replyIntent)
             finish()
         }
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        if (sharedPreferences?.getString("isEdit", "false")!!.toBoolean()) {
+
+        if (sharedPreferences.getString("isEdit", "false").toBoolean()) {
             textViewTodoTitle.setText(sharedPreferences.getString("todoTitle", "title")!!)
             textViewTodoDescription.setText(sharedPreferences.getString("todoDescription", "title")!!)
             textViewPriority.setText(sharedPreferences.getString("todoPriority", "title")!!)
             textViewTag.setText(sharedPreferences.getString("todoTag", "title")!!)
+            buttonDelete.visibility = VISIBLE
+        }
+        else {
+            buttonDelete.visibility = INVISIBLE
         }
     }
 
@@ -117,6 +126,7 @@ class DetailActivity : AppCompatActivity() {
         textViewTodoDescription.textSize = textSize
         textViewPriority.textSize = textSize
         textViewTag.textSize = textSize
+        buttonDelete.textSize = textSize
         buttonCancel.textSize = textSize
         buttonSave.textSize = textSize
 

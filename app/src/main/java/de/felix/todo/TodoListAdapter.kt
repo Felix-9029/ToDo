@@ -120,5 +120,8 @@ class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
                 return (oldItem.title == newItem.title && oldItem.description == newItem.description && oldItem.expiration == newItem.expiration)
             }
         }
+        fun getTodo(position: Int) : Todo {
+            return getItem(position)
+        }
     }
 }
