@@ -1,4 +1,4 @@
-package de.felix.todo
+package de.felix.todo.database
 
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow

@@ -1,4 +1,4 @@
-package de.felix.todo
+package de.felix.todo.database
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

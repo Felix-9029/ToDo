@@ -1,4 +1,4 @@
-package de.felix.todo
+package de.felix.todo.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

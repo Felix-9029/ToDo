@@ -13,6 +13,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.felix.todo.*
+import de.felix.todo.database.*
 import de.felix.todo.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 

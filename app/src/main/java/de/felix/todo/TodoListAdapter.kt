@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DiffUtil
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.felix.todo.Activity.DetailActivity
 import de.felix.todo.Activity.MainActivity
 import de.felix.todo.TodoListAdapter.TodoViewHolder
+import de.felix.todo.database.Todo
 
 class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
 
@@ -119,9 +119,6 @@ class TodoListAdapter : ListAdapter<Todo, TodoViewHolder>(TODO_COMPARATOR) {
             override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
                 return (oldItem.title == newItem.title && oldItem.description == newItem.description && oldItem.expiration == newItem.expiration)
             }
-        }
-        fun getTodo(position: Int) : Todo {
-            return getItem(position)
         }
     }
 }

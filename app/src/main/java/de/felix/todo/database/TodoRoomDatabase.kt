@@ -1,4 +1,4 @@
-package de.felix.todo
+package de.felix.todo.database
 
 import android.content.Context
 import androidx.room.Database

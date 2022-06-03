@@ -1,8 +1,6 @@
-package de.felix.todo
+package de.felix.todo.database
 
 import android.app.Application
-import de.felix.todo.TodoRepository
-import de.felix.todo.TodoRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 

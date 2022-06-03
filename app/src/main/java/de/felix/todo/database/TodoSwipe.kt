@@ -1,8 +1,9 @@
-package de.felix.todo
+package de.felix.todo.database
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import de.felix.todo.Activity.MainActivity
+import de.felix.todo.TodoListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class TodoSwipe(todoViewModel: TodoViewModel) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT /*or ItemTouchHelper.RIGHT*/) {
@@ -20,7 +21,6 @@ class TodoSwipe(todoViewModel: TodoViewModel) : ItemTouchHelper.SimpleCallback(0
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-        TodoListAdapter.getTodo(viewHolder.adapterPosition)
         val position: Int = viewHolder.adapterPosition
         val adapter: TodoListAdapter = MainActivity.mainActivity.recyclerView.adapter as TodoListAdapter
         when (direction) {
